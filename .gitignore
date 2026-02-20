@@ -1,0 +1,7 @@
+# Local files
+**/*.lc
+# Homeworks
+**/*.hw
+# PDF-s
+**/*.pdf
+!**/main.pdf

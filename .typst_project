@@ -1,0 +1,16 @@
+This file is a marker for auto-determining language server's typst root.
+In my nvim setup I use:
+
+    vim.lsp.config('tinymist', {
+        offset_encoding = 'utf-32', -- tinymist seems to be bugged
+        root_dir = function(bufnr, on_dir)
+            local auto_root = vim.fs.root(bufnr, '.typst_project')
+            if auto_root ~= nil then
+                on_dir(auto_root)
+            else
+                on_dir(vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)))
+            end
+        end
+    })
+
+You can set root to / or this directory.
