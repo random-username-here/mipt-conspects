@@ -107,7 +107,8 @@
 #let with(..x)    = $lr("" #_bexpand(x) |)$
 #let shell(..v)   = $lr(angle.l #_bexpand(v) angle.r)$
 
-#let sep = align(center, line(length: 20%, stroke: 0.5pt))
+//#let sep = align(center, line(length: 20%, stroke: 0.5pt))
+#let sep = align(center, v(1em) + image("img/fancy-sep.svg") + v(1em))
 
 
 // now go copypasted ones

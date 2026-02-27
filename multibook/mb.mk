@@ -4,7 +4,7 @@ UTILS := $(LIB_DIR)/util.sh
 TYPE ?= normal
 
 CHAPTERS := $(sort $(shell $(UTILS) find_chapters $(BOOK_DIR)))
-#GIT_HASH := $(shell git rev-parse --short HEAD)
+GIT_HASH := $(shell git rev-parse --short HEAD)
 
 CHAPTER_OUTPUTS := $(addsuffix .pdf, $(addprefix build/, $(CHAPTERS)))
 CHAPTER_INPUTS := $(addsuffix /doc.typ, $(CHAPTERS))
@@ -16,7 +16,7 @@ TYPST_ARGS += --input lib_dir='$(LIB_DIR)'
 TYPST_ARGS += --input book_dir='$(BOOK_DIR)'
 TYPST_ARGS += --input chapters='$(CHAPTERS)'
 TYPST_ARGS += --input type='$(TYPE)'
-#TYPST_ARGS += --input git_hash='$(GIT_HASH)'
+TYPST_ARGS += --input git_hash='$(GIT_HASH)'
 
 .PHONY: info
 info:

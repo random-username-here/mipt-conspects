@@ -111,3 +111,7 @@
         align(center, label)
     }
 }
+
+#let icon(x) = text(font: "FiraCode Nerd Font", x)
+
+#let url(..args) = underline(link(..args))

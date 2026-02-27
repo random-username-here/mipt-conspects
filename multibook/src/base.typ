@@ -54,7 +54,8 @@
     color: blue,
     pattern: none,
     patscale: 1,
-    mode: "book"
+    mode: "book",
+    logos: []
 ) = {
 
     let patternImage = (bg, fg) => none
@@ -107,13 +108,23 @@
         }
     }
 
+    if logos == "ktl" {
+        // lectures tex club & mipt branding
+        logos = stack(
+            dir: ltr,
+            link("https://github.com/LecturesTexClub/lectures_tex_club", image("img/logo_ltc_inverse.png", height: 5em)),
+            link("https://mipt.ru/", image("img/mipt_rus_inv_eps.svg", height: 5em))
+        )
+    }
+
     return it => withTopLevelRules({
         
         updateState()
         bookTitlepage(
             title: title,
             fields: fields,
-            extra: it
+            extra: it,
+            logos: logos
         )
         pagebreak()
 

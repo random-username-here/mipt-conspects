@@ -31,7 +31,7 @@
 ///
 /// Generate book's titlepage
 /// 
-#let bookTitlepage(title: [], fields: (), extra: []) = {
+#let bookTitlepage(title: [], fields: (), extra: [], logos: []) = {
     context {
         let theme = makeTheme()
         set page(fill: (theme.pattern)(
@@ -58,9 +58,11 @@
         })
 
         place(bottom + right,
+            logos +
             text(fill: white, [
                 Документ скомпилирован #datetime.today().display()\
-                Версия typst #sys.version
+                Версия typst #sys.version\
+                git commit #sys.inputs.git_hash
             ])
         )
     }
