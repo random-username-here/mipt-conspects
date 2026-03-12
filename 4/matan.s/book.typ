@@ -11,7 +11,7 @@
         ],
         [ Курс ],           [ 2 (4-й семестр), 2025-2026 год ],
         [ Группа ],         [ ФПМИ/ИВТсп, Б05-431 ],
-        [ Гитхаб ],         [ #icon[]#h(0.6em)#url("https://github.com/random-username-here/mipt-conspects/blob/master/4/prob.s/build/main.pdf")[random-username-here/mipt-conspects] ]
+        [ Гитхаб ],         [ #icon[]#h(0.6em)#url("https://github.com/random-username-here/mipt-conspects/")[random-username-here/mipt-conspects] ]
     ),
     color: navy,
     pattern: "formal-invitation",

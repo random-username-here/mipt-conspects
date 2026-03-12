@@ -34,14 +34,16 @@
         T: false,
         pts: 64,
         c: 1pt + green,
-        ymin : -float.inf, ymax: float.inf
+        ymin : -float.inf, ymax: float.inf,
+        mark: none
 ) = {
     draw.line(
         ..array.range(pts)
             .map(i => xmin + (xmax - xmin) / (pts - 1) * i)
             .map(x => if T { (f(x), x) } else {(x, f(x))} )
             .filter(((x, y)) => if T { ymin < x and x < ymax} else {ymin < y and y < ymax }),
-        stroke: c
+        stroke: c,
+        mark: mark
     )
 }
 
@@ -101,7 +103,7 @@
 ///
 /// `xl` and `yl` are X and Y labels
 ///
-#let axes(xmin, ymin, xmax, ymax, extra: false, xl: $x$, yl: $y$, iz: false) = {
+#let axes(xmin, ymin, xmax, ymax, extra: false, xl: $x$, yl: $y$, iz: false, z: $0$) = {
 
     let ex = if extra {
         calc.max(xmax - xmin, ymax - ymin) * 0.1 
@@ -111,17 +113,19 @@
 
     draw.line(
         (xmin - ex, 0), (xmax + ex, 0),
-        mark: (end: "barbed")
+        mark: (end: "barbed"),
+        stroke: 0.5pt + black
     )
     draw.line(
         (0, ymin - ex), (0, ymax + ex),
-        mark: (end: "barbed")
+        mark: (end: "barbed"),
+        stroke: 0.5pt + black
     )
     
     if iz {
-        draw.content((-5pt, 5pt), $0$, anchor: "south-east")
+        draw.content((-5pt, 5pt), z, anchor: "south-east")
     } else {
-        draw.content((-5pt, -5pt), $0$, anchor: "north-east")
+        draw.content((-5pt, -5pt), z, anchor: "north-east")
     }
     draw.content((xmax + ex, 0), h(5pt) + xl, anchor: "west")
     draw.content((0, ymax + ex), yl + v(5pt), anchor: "south")
