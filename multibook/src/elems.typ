@@ -1,7 +1,7 @@
 ///
 /// Internal book elements, like titlepages, etc.
 ///
-#import "theme.typ": makeTheme, makeStatelessTheme
+#import "theme.typ": makeTheme, makeStatelessTheme, state as themeState
 
 ///
 /// Apply top-level show and set rules
@@ -25,7 +25,8 @@
     set text(font: theme.font)
     //show link: it => underline(it)
     show heading.where(level: 2) : it => text(font: "IBM Plex Serif", it)
-    it
+    let extras = themeState.extraRules.get()
+    extras(it)
 }
 
 ///

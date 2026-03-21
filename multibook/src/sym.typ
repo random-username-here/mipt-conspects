@@ -62,6 +62,7 @@
 #let sups       = sym.supset
 #let grad       = sym.gradient
 #let cc         = sym.complement
+#let seq        = $#h(0.3em) ... #h(0.3em)$
 
 /// Epsilon shorthand
 #let eps        = sym.epsilon

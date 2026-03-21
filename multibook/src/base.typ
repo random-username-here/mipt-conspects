@@ -55,7 +55,8 @@
     pattern: none,
     patscale: 1,
     mode: "book",
-    logos: []
+    logos: [],
+    extraRules: x => x
 ) = {
 
     let patternImage = (bg, fg) => none
@@ -100,6 +101,7 @@
     let updateState() = {
         themeState.accent.update(color)
         themeState.pattern.update((_) => patternImage)
+        themeState.extraRules.update((_) => extraRules)
     }
 
     if not options.isFullBook {

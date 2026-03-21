@@ -1,7 +1,8 @@
 
 #let state = (
     accent: state("theme.state.accent", green),
-    pattern: state("theme.state.pattern", (bg, fg) => none)
+    pattern: state("theme.state.pattern", (bg, fg) => none),
+    extraRules: state("theme.state.extra-rules", (x) => x)
 )
 
 #let colorIsDark(color) = {
