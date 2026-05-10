@@ -87,6 +87,7 @@
 #let sh         = math.op("sh")
 #let th         = math.op("th")
 #let tg         = math.op("tg")
+#let arctg         = math.op("arctg")
 #let Re         = math.op("Re")
 #let Im         = math.op("Im")
 #let Ker        = math.op("Ker")

@@ -77,11 +77,12 @@
 
     let sth = makeStatelessTheme()
 
-    let titleContents = text(
-        text(title, size: 1.5em, font: "IBM Plex Serif") +
-        h(1fr) +
-        text(date)
-    ) + linebreak() + v(0.1em) + msg
+    let titleContents = stack(dir: ltr, 
+            box(width: 70%, text(title, size: 1.5em, font: "IBM Plex Serif")),
+            h(5em),
+            h(1fr),
+            text(date)
+    ) + v(0.1em) + msg
 
     place(layout(pageSize => {
         let titleSize = measure(titleContents, width: pageSize.width) 
