@@ -13,7 +13,7 @@
         [ Группа ],         [ ФПМИ/ИВТсп, Б05-431 ],
         [ Гитхаб ],         [ #icon[]#h(0.6em)#url("https://github.com/random-username-here/mipt-conspects/")[random-username-here/mipt-conspects] ]
     ),
-    color: navy,
+    color: blue.darken(50%).desaturate(20%),
     pattern: "formal-invitation",
     patscale: 0.7,
     logos: "ktl"

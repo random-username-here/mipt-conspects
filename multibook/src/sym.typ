@@ -87,7 +87,7 @@
 #let sh         = math.op("sh")
 #let th         = math.op("th")
 #let tg         = math.op("tg")
-#let arctg         = math.op("arctg")
+#let arctg      = math.op("arctg")
 #let Re         = math.op("Re")
 #let Im         = math.op("Im")
 #let Ker        = math.op("Ker")
@@ -107,11 +107,9 @@
 }
 
 #let with(..x)    = $lr("" #_bexpand(x) |)$
-#let shell(..v)   = $lr(angle.l #_bexpand(v) angle.r)$
+#let shell(..v)   = $lr(chevron.l #_bexpand(v) chevron.r)$
 
-//#let sep = align(center, line(length: 20%, stroke: 0.5pt))
 #let sep = align(center, v(1em) + image("img/fancy-sep.svg") + v(1em))
-
 
 // now go copypasted ones
 
@@ -200,5 +198,15 @@
 #let dx         = $dd x$
 #let dy         = $dd y$
 #let dz         = $dd z$
+
+#let pdt         = $pd t$
+#let pdu         = $pd u$
+#let pdv         = $pd v$
+#let pdw         = $pd w$
+#let pdx         = $pd x$
+#let pdy         = $pd y$
+#let pdz         = $pd z$
+#let pdF         = $pd F$
+
 #let d1         = $bb(1)$ // double-struck 1 for indicators
 

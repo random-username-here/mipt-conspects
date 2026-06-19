@@ -12,7 +12,7 @@
         [ Группа ],         [ ФПМИ/ИВТсп, Б05-431 ],
         [ Гитхаб ],         [ #icon[]#h(0.6em)#url("https://github.com/random-username-here/mipt-conspects/blob/master/4/prob.s/build/main.pdf")[random-username-here/mipt-conspects] ]
     ),
-    color: olive,
+    color: olive.desaturate(30%),
     pattern: "clouds",
     patscale: 0.7,
     logos: "ktl"

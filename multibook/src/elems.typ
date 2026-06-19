@@ -24,8 +24,10 @@
     show heading : it => it + v(0.2em)
     set text(font: theme.font)
     //show link: it => underline(it)
-    show heading.where(level: 2) : it => text(font: "IBM Plex Serif", it)
+    show heading.where(level: 2) : it => text(font: theme.titleFont, it)
     let extras = themeState.extraRules.get()
+    show raw: set text(font: theme.codeFont)
+    show raw.where(block: true): it => block(inset: (left: 10pt, y: 3pt), it)
     extras(it)
 }
 
@@ -40,7 +42,7 @@
             theme.accentBgAlt
         ), footer: none)
         text(size: 1.3em, fill: white, {
-            std.title(text(font: "IBM Plex Serif", title))
+            std.title(text(font: theme.titleFont, title))
             v(2em)
             table(
                 stroke: none,
@@ -63,7 +65,7 @@
             text(fill: white, [
                 Документ скомпилирован #datetime.today().display()\
                 Версия typst #sys.version\
-                git commit #sys.inputs.git_hash
+                //git commit #sys.inputs.git_hash
             ])
         )
     }
@@ -78,8 +80,8 @@
     let sth = makeStatelessTheme()
 
     let titleContents = stack(dir: ltr, 
-            box(width: 70%, text(title, size: 1.5em, font: "IBM Plex Serif")),
-            h(5em),
+            box(width: 90%, text(title, size: 1.5em, font: sth.titleFont)),
+            h(1em),
             h(1fr),
             text(date)
     ) + v(0.1em) + msg
@@ -103,7 +105,7 @@
                 height: marginTop + titleSize.height + 1cm,
                 fill: (theme.pattern)(bgcolor, color),
                 stroke: (
-                    bottom: 2pt + color 
+                    bottom: 1pt + theme.accent.lighten(65%)
                 )
             )
         )
@@ -139,6 +141,42 @@
             link(i.location(), i.body)
         }
     }
+}
+
+#let patternImage(pattern, patscale: 0.7) = {
+    let path = "patterns/" + pattern + ".svg"
+    let width = 5
+    let height = 5
+    for i in xml(path) {
+        if i.tag == "svg" {
+            if "width" in i.attrs {
+                width = int(i.attrs.width.replace("px", ""))
+                height = int(i.attrs.height.replace("px", ""))
+            } else {
+                let box = i.attrs.viewBox.split()
+                width = int(box.at(2)) - int(box.at(0))
+                height = int(box.at(3)) - int(box.at(1))
+            }
+        }
+    }
+    width = width * patscale
+    height = height * patscale
+    let svg = read(path)
+    return (bg, fg) => tiling(
+        size: (width * 1pt, height * 1pt),
+        box(
+            width: (width + 2) * 1pt,
+            height: (height + 2) * 1pt,
+            image(
+                bytes(svg
+                    .replace("#000000", fg.to-hex())
+                    .replace("#000", fg.to-hex())),
+                width: width * 1pt,
+                format: "svg"
+            ),
+            fill: bg
+        )
+    )
 }
 
 #let normalOutline() = {

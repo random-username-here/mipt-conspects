@@ -56,50 +56,19 @@
     patscale: 1,
     mode: "book",
     logos: [],
-    extraRules: x => x
+    extraRules: x => x,
+    singleFile: false,
+    descr: none
 ) = {
 
-    let patternImage = (bg, fg) => none
-
-    if pattern != none {
-        // todo: use recolorSVG from theme.typ here
-        let path = "patterns/" + pattern + ".svg"
-        let width = 5
-        let height = 5
-        for i in xml(path) {
-            if i.tag == "svg" {
-                if "width" in i.attrs {
-                    width = int(i.attrs.width.replace("px", ""))
-                    height = int(i.attrs.height.replace("px", ""))
-                } else {
-                    let box = i.attrs.viewBox.split()
-                    width = int(box.at(2)) - int(box.at(0))
-                    height = int(box.at(3)) - int(box.at(1))
-                }
-            }
-        }
-        width = width * patscale
-        height = height * patscale
-        let svg = read(path)
-        patternImage = (bg, fg) => tiling(
-            size: (width * 1pt, height * 1pt),
-            box(
-                width: (width+1) * 1pt,
-                height: (height+1) * 1pt,
-                image(
-                    bytes(svg
-                        .replace("#000000", fg.to-hex())
-                        .replace("#000", fg.to-hex())),
-                    width: width * 1pt,
-                    format: "svg"
-                ),
-                fill: bg
-            )
-        )
+    let patternImage = if pattern != none {
+        patternImage(pattern, patscale: patscale)
+    } else {
+        (bg, fg) => none
     }
 
     let updateState() = {
-        themeState.accent.update(color)
+        themeState.accent.update(rgb(color))
         themeState.pattern.update((_) => patternImage)
         themeState.extraRules.update((_) => extraRules)
     }
@@ -125,7 +94,7 @@
         bookTitlepage(
             title: title,
             fields: fields,
-            extra: it,
+            extra: if singleFile { descr } else { descr; it },
             logos: logos
         )
         pagebreak()
@@ -134,10 +103,15 @@
         customOutline(variant: mode)
         pagebreak()
 
-        for name in options.chapters {
-            let file = options.bookDir + "/" + name + "/doc.typ"
-            curDir.update(options.bookDir + "/" + name)
-            include file
+        if singleFile {
+            curDir.update(options.bookDir)
+            it
+        } else {
+            for name in options.chapters {
+                let file = options.bookDir + "/" + name + "/doc.typ"
+                curDir.update(options.bookDir + "/" + name)
+                include file
+            }
         }
     })
 }

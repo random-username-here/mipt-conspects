@@ -1,6 +1,6 @@
 #import "../../../multibook/mb.typ": *
 #show : mb.chapter(
-    title: [Семинар 12. Скип.],
+    title: [Семинар 12. Его не было],
     date: [21 апреля]
 )
 

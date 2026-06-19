@@ -43,7 +43,7 @@
 #let makeStatelessTheme() = {
     return (        
         font:      "IBM Plex Sans",
-        titleFont: "IBM Plex Sans",
+        titleFont: "IBM Plex Serif",
         codeFont:  "IBM Plex Mono",
 
         bg: white,

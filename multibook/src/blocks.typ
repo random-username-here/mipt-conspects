@@ -10,11 +10,16 @@
     inset: 10pt,
     width: 100%,
     fill: bg,
-    stroke: (left: 1pt + border),
+    stroke: (
+        left: 2pt + border,
+        top: 0.5pt + border.lighten(50%),
+        right: 0.5pt + border.lighten(50%),
+        bottom: 0.5pt + border.lighten(50%),
+    ),
     x
 )
 
-#let def(x) = contentBlock(x, bg: luma(250), border: black)
+#let def(x) = contentBlock(x, bg: luma(245), border: luma(80))
 #let task(x) = context {
     let theme = makeTheme()
     contentBlock(x, bg: theme.accent.lighten(90%), border: theme.accent)
@@ -22,7 +27,7 @@
 #let term(x) = {
     show heading: none
     heading(level: 4, x)
-    highlight(fill: none, underline(x))
+    highlight(fill: none, text(weight: "semibold", x))
 }
 
 #let proof(x) = block(inset: (left: 5pt), block(
