@@ -5,10 +5,10 @@
     extraRules: state("theme.state.extra-rules", (x) => x)
 )
 
-#let colorIsDark(color) = {
+#let brightness(color) = {
     let (r, g, b) = color.components(alpha: false)
     let p = calc.sqrt(float(0.299 * r * r + 0.587 * g * g + 0.114 * b * b))
-    return p < 0.4;
+    return p;
 }
 
 #let recolorSVG(path, color, rescale: 1) = {
@@ -67,11 +67,7 @@
 
         accent: accent,
         accentBg: accent.darken(50%),
-        accentBgAlt: if colorIsDark(accent) {
-            accent.darken(20%)
-        } else {
-            accent.darken(40%)
-        },
+        accentBgAlt: accent.darken(30% + brightness(accent) * 10%),
         pattern: pattern,
     )
 }
