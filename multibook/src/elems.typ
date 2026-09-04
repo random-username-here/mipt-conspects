@@ -8,6 +8,7 @@
 /// to given content
 ///
 #let withTopLevelRules(it) = context {
+    import "blocks.typ": aasvg
     let theme = makeTheme()
     set heading(offset: 1)
     set page(
@@ -28,6 +29,9 @@
     let extras = themeState.extraRules.get()
     show raw: set text(font: theme.codeFont)
     show raw.where(block: true): it => block(inset: (left: 10pt, y: 3pt), it)
+    show raw.where(lang: "aad"): it => aasvg(it.text)
+    show raw.where(lang: "aadc"): it => align(center, aasvg(it.text))
+    set table(stroke: 0.5pt + luma(180))
     extras(it)
 }
 

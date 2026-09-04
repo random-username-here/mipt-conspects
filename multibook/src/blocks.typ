@@ -119,4 +119,29 @@
 
 #let icon(x) = text(font: "FiraCode Nerd Font", x)
 
-#let url(..args) = underline(link(..args))
+#let url(..args) = text(fill: blue, underline(link(..args)))
+
+#let aasvg_wasm = plugin("./typst_aasvg.wasm")
+
+#let aasvg(
+    code,
+    backdrop: false,
+    disable-text: false,
+    spaces: 2,
+    stretch: false,
+    ..args,
+) = {
+    let svg = str(aasvg_wasm.render_with_options(
+        bytes(code),
+        cbor.encode((
+            backdrop: backdrop,
+            disable_text: disable-text,
+            spaces: spaces,
+            stretch: stretch)
+        ),
+    ))
+    // fix fill
+    svg = svg.replace("fill=\"black\" stroke=\"black\"", "fill=\"white\" stroke=\"black\"")
+    svg = svg.replace("fill=\"#666\"", "fill=\"#aaa\"")
+    image(bytes(svg), format: "svg", ..args)
+}
